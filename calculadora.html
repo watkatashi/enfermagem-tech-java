@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora da Jade - Enfermagem</title>
+    <style>
+        /* Mudei as cores para um tom de azul mais suave */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+        .container-calculadora {
+            background: #ffffff;
+            border: 2px solid #b2dfdb; /* Borda fininha */
+            padding: 25px;
+            border-radius: 20px;
+            width: 320px;
+            text-align: center;
+        }
+        h2 { color: #00796b; font-size: 22px; }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #4db6ac;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #visor-resultado {
+            margin-top: 20px;
+            color: #d32f2f; /* Vermelho para destaque */
+            font-size: 20px;
+        }
+        .aviso-clinico {
+            font-size: 11px;
+            color: #777;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-calculadora">
+    <h2>🩺 Minha Calculadora</h2>
+    <p>Facilitando o cálculo de gotejamento</p>
+    
+    <input type="number" id="vol" placeholder="Volume (ml)">
+    <input type="number" id="hrs" placeholder="Tempo (horas)">
+
+    <button onclick="rodarCalculo()">Calcular Agora</button>
+
+    <div id="visor-resultado"></div>
+    
+    <p class="aviso-clinico">⚠️ Lembre-se de conferir sempre com a prescrição médica antes de administrar.</p>
+</div>
+
+<script>
+    function rodarCalculo() {
+        // Nomes de variáveis mais simples, como a gente cria no começo
+        var volume = document.getElementById('vol').value;
+        var tempo = document.getElementById('hrs').value;
+        
+        if (volume > 0 && tempo > 0) {
+            var resultadoFinal = volume / (tempo * 3);
+            
+            // Exibindo na tela
+            document.getElementById('visor-resultado').innerHTML = 
+                Math.round(resultadoFinal) + " gts/min";
+        } else {
+            alert("Preenche os campos aí! :)");
+        }
+    }
+</script>
+
+</body>
+</html>
