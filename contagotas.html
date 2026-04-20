@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Calculadora de Enfermagem | Jade Marques</title>
+    <style>
+        :root {
+            --azul-principal: #3498db; 
+            --azul-escuro: #2980b9;
+            --cor-fundo: #b9ddf5;
+            --cor-texto: #34495e;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif; 
+            background-color: var(--cor-fundo);
+            background-image: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            color: var(--cor-texto);
+        }
+
+        .painel-principal {
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(10px); 
+            padding: 40px 30px;
+            border-radius: 25px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            width: 100%;
+            max-width: 380px;
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            position: relative; 
+        }
+
+        h2 { 
+            color: var(--azul-principal); 
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .grupo-input {
+            margin-bottom: 18px;
+        }
+
+        label { 
+            display: block; 
+            margin-bottom: 7px; 
+            color: var(--cor-texto);
+            font-size: 0.95rem;
+            margin-left: 5px; 
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dbe2e8;
+            border-radius: 12px; 
+            box-sizing: border-box; 
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+       
+        input:focus {
+            outline: none;
+            border-color: var(--azul-principal);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--azul-principal);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        button:hover { background-color: var(--azul-escuro); }
+        button:active { transform: translateY(1px); } 
+
+        #caixa-resultado {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(52, 152, 219, 0.1); 
+            border-radius: 15px;
+            color: var(--azul-escuro);
+            text-align: center;
+            display: none; 
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .valor-resultado {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .assinatura {
+            position: fixed;
+            bottom: 15px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-style: italic;
+            opacity: 0.7;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="painel-principal">
+        <h2>Cálculo de Gotejamento</h2>
+        
+        <div class="grupo-input">
+            <label for="volume">Volume Total (ml)</label>
+            <input type="number" id="volume" placeholder="Ex: 500">
+        </div>
+
+        <div class="grupo-input">
+            <label for="tempo">Tempo (horas)</label>
+            <input type="number" id="tempo" placeholder="Ex: 8">
+        </div>
+
+        <button onclick="realizarCalculo()">Calcular Gotas/min</button>
+
+        <div id="caixa-resultado">
+            <span>O gotejamento deve ser de:</span>
+            <span class="valor-resultado" id="texto-resultado"></span>
+            <span>gotas por minuto.</span>
+        </div>
+    </div>
+
+    <div class="assinatura">primeiro projeto de Jade Marques</div>
+
+    <script>
+        function realizarCalculo() {
+            const inputVolume = document.getElementById('volume').value;
+            const inputTempo = document.getElementById('tempo').value;
+            
+            const numVolume = parseFloat(inputVolume);
+            const numTempo = parseFloat(inputTempo);
+
+            const displayResultado = document.getElementById('caixa-resultado');
+            const textoResultado = document.getElementById('texto-resultado');
+
+            if (numVolume > 0 && numTempo > 0) {
+                
+                const resultadoFinal = numVolume / (numTempo * 3);
+
+                displayResultado.style.display = 'block';
+                textoResultado.innerHTML = resultadoFinal.toFixed(0);
+                
+            } else {
+                displayResultado.style.display = 'none';
+                alert("Ops! Verifique se você preencheu o Volume e o Tempo corretamente.");
+            }
+        }
+    </script>
+
+</body>
+</html>
